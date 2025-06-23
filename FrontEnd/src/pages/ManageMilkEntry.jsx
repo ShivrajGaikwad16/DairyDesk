@@ -180,7 +180,7 @@ const ManageMilkEntry = () => {
 
          {/* Edit Modal */}
          {editingEntry && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm">
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-40 backdrop-blur-sm">
                <div className="bg-white p-6 rounded shadow-md w-full max-w-md mx-4">
                   <h2 className="text-xl font-semibold mb-4 text-green-700">
                      {t("editMilkEntry")}

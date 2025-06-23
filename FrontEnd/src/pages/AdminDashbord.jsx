@@ -109,7 +109,16 @@ const AdminDashboard = () => {
          body: tableData,
       });
 
-      doc.save("WeeklySalaryReport.pdf");
+      const base64 = doc.output("datauristring");
+      if (window.AndroidInterface) {
+         window.AndroidInterface.downloadBase64Pdf(
+            base64,
+            "WeeklySalaryReport.pdf"
+         );
+      } else {
+         doc.save("WeeklySalaryReport.pdf"); // fallback for web
+      }
+
    };
 
    return (
