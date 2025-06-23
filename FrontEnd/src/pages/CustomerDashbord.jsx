@@ -87,17 +87,17 @@ const CustomerDashboard = () => {
             t(e.session),
             e.liters,
             e.fat,
-            `₹${e.amount.toFixed(2)}`,
+            `Rs. ${e.amount.toFixed(2)}`,
          ]),
       });
 
       const total = weekEntries.reduce((sum, e) => sum + e.amount, 0);
       doc.text(
-         `${t("total")}: ₹${total.toFixed(2)}`,
+         `${t("total")}: Rs. ${total.toFixed(2)}`,
          14,
          doc.lastAutoTable.finalY + 10
       );
-      
+
       const base64 = doc.output("datauristring");
       if (window.AndroidInterface) {
          window.AndroidInterface.downloadBase64Pdf(
@@ -166,8 +166,8 @@ const CustomerDashboard = () => {
                </div>
 
                {/* Week Table */}
-               <div className="bg-white p-4 rounded shadow">
-                  <div className="flex justify-between items-center mb-2">
+               <div className="bg-white p-4 rounded shadow overflow-x-auto">
+                  <div className="flex justify-between items-center mb-2 min-w-[600px]">
                      <h2 className="font-semibold text-lg text-green-700">
                         {t("week")}: {formatWeekRange(selectedWeek)}
                      </h2>
@@ -179,37 +179,39 @@ const CustomerDashboard = () => {
                      </button>
                   </div>
 
-                  <table className="w-full text-sm border-t border-gray-200">
-                     <thead>
-                        <tr className="bg-gray-100">
-                           <th className="p-2">{t("date")}</th>
-                           <th className="p-2">{t("session")}</th>
-                           <th className="p-2">{t("liters")}</th>
-                           <th className="p-2">{t("fat")}</th>
-                           <th className="p-2">{t("amount")}</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        {weekEntries.map((entry, i) => (
-                           <tr key={i} className="border-b text-center">
-                              <td className="p-2">
-                                 {new Date(entry.date).toLocaleDateString()}
-                              </td>
-                              <td className="p-2 capitalize">
-                                 {t(entry.session)}
-                              </td>
-                              <td className="p-2">{entry.liters}</td>
-                              <td className="p-2">{entry.fat}</td>
-                              <td className="p-2">
-                                 ₹{entry.amount.toFixed(2)}
-                              </td>
+                  <div className="overflow-x-auto">
+                     <table className="w-full text-sm border-t border-gray-200 min-w-[600px]">
+                        <thead>
+                           <tr className="bg-gray-100 text-center">
+                              <th className="p-2">{t("date")}</th>
+                              <th className="p-2">{t("session")}</th>
+                              <th className="p-2">{t("liters")}</th>
+                              <th className="p-2">{t("fat")}</th>
+                              <th className="p-2">{t("amount")}</th>
                            </tr>
-                        ))}
-                     </tbody>
-                  </table>
+                        </thead>
+                        <tbody>
+                           {weekEntries.map((entry, i) => (
+                              <tr key={i} className="border-b text-center">
+                                 <td className="p-2">
+                                    {new Date(entry.date).toLocaleDateString()}
+                                 </td>
+                                 <td className="p-2 capitalize">
+                                    {t(entry.session)}
+                                 </td>
+                                 <td className="p-2">{entry.liters}</td>
+                                 <td className="p-2">{entry.fat}</td>
+                                 <td className="p-2">
+                                    Rs. {entry.amount.toFixed(2)}
+                                 </td>
+                              </tr>
+                           ))}
+                        </tbody>
+                     </table>
+                  </div>
 
-                  <div className="text-right mt-4 font-semibold">
-                     {t("total")} (₹):{" "}
+                  <div className="text-right mt-4 font-semibold min-w-[600px]">
+                     {t("total")} (Rs.):{" "}
                      {weekEntries
                         .reduce((acc, e) => acc + e.amount, 0)
                         .toFixed(2)}
