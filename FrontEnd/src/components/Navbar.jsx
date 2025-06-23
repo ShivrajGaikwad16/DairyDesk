@@ -1,4 +1,3 @@
-// components/Navbar.jsx
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
@@ -29,6 +28,11 @@ const Navbar = () => {
 
    const handleLanguageChange = (e) => {
       i18n.changeLanguage(e.target.value);
+      setMenuOpen(false); // Close after language change
+   };
+
+   const closeMenu = () => {
+      setMenuOpen(false);
    };
 
    const renderLinks = () => {
@@ -38,6 +42,7 @@ const Navbar = () => {
                <div className="block">
                   <Link
                      to="/admin/login"
+                     onClick={closeMenu}
                      className="block py-1 text-gray-700 hover:text-green-600"
                   >
                      {t("admin_login")}
@@ -46,6 +51,7 @@ const Navbar = () => {
                <div className="block">
                   <Link
                      to="/customer/login"
+                     onClick={closeMenu}
                      className="block py-1 text-gray-700 hover:text-green-600"
                   >
                      {t("customer_login")}
@@ -59,10 +65,7 @@ const Navbar = () => {
          return (
             <>
                {[
-                  {
-                     to: "/admin-dashboard",
-                     label: t("adminDashboard") || "Dashboard",
-                  },
+                  { to: "/admin-dashboard", label: t("adminDashboard") },
                   { to: "/add-entry", label: t("add_milk_entry") },
                   { to: "/add-customer", label: t("add_customer") },
                   { to: "/manage-customer", label: t("manageCustomers") },
@@ -71,6 +74,7 @@ const Navbar = () => {
                   <div key={idx} className="block">
                      <Link
                         to={item.to}
+                        onClick={closeMenu}
                         className="block py-1 text-gray-700 hover:text-green-600"
                      >
                         {item.label}
@@ -79,10 +83,13 @@ const Navbar = () => {
                ))}
                <div className="block">
                   <button
-                     onClick={handleLogout}
+                     onClick={() => {
+                        handleLogout();
+                        closeMenu();
+                     }}
                      className="block py-1 text-red-600 hover:text-red-800"
                   >
-                     {t("logout") || "Logout"}
+                     {t("logout")}
                   </button>
                </div>
             </>
@@ -95,17 +102,21 @@ const Navbar = () => {
                <div className="block">
                   <Link
                      to="/customer-dashboard"
+                     onClick={closeMenu}
                      className="block py-1 text-gray-700 hover:text-green-600"
                   >
-                     {t("dashboard") || "Dashboard"}
+                     {t("dashboard")}
                   </Link>
                </div>
                <div className="block">
                   <button
-                     onClick={handleLogout}
+                     onClick={() => {
+                        handleLogout();
+                        closeMenu();
+                     }}
                      className="block py-1 text-red-600 hover:text-red-800"
                   >
-                     {t("logout") || "Logout"}
+                     {t("logout")}
                   </button>
                </div>
             </>
@@ -114,12 +125,15 @@ const Navbar = () => {
 
       return null;
    };
-   
 
    return (
       <nav className="bg-white shadow-md fixed top-0 left-0 right-0 z-50 h-16">
          <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-            <Link to="/" className="text-2xl font-bold text-green-600">
+            <Link
+               to="/"
+               onClick={closeMenu}
+               className="text-2xl font-bold text-green-600"
+            >
                🐄 DairyLedger
             </Link>
 

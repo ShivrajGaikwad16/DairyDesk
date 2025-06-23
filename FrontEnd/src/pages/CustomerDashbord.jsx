@@ -97,7 +97,16 @@ const CustomerDashboard = () => {
          14,
          doc.lastAutoTable.finalY + 10
       );
-      doc.save(`milk-summary-${selectedWeek}.pdf`);
+      
+      const base64 = doc.output("datauristring");
+      if (window.AndroidInterface) {
+         window.AndroidInterface.downloadBase64Pdf(
+            base64,
+            `milk-summary-${selectedWeek}.pdf`
+         );
+      } else {
+         doc.save(`milk-summary-${selectedWeek}.pdf`);
+      }
    };
 
    const sortedWeeks = Object.keys(weeklyGrouped).sort().reverse();

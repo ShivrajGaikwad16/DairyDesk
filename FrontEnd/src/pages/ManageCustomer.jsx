@@ -158,7 +158,7 @@ const ManageCustomer = () => {
                            </button>
                            <button
                               onClick={() => deleteCustomer(c._id)}
-                              className="bg-red-500 text-white px-3 py-1 rounded"
+                              className="bg-red-500 text-white px-3 py-1 mt-1 md:mt-0 rounded"
                            >
                               {t("delete")}
                            </button>
