@@ -21,9 +21,7 @@ const CustomerDashboard = () => {
          try {
             const res = await axios.get(
                `https://dairy-desk.vercel.app/api/v1/milkentry/customer-milk-entry?customerId=${customerId}`,
-               {
-                  headers: { Authorization: `Bearer ${token}` },
-               }
+               { headers: { Authorization: `Bearer ${token}` } }
             );
             const grouped = groupByCustomWeek(res.data.data);
             setWeeklyGrouped(grouped);
@@ -78,7 +76,6 @@ const CustomerDashboard = () => {
          14,
          20
       );
-
       autoTable(doc, {
          startY: 30,
          head: [[t("date"), t("session"), t("liters"), t("fat"), t("amount")]],
@@ -119,8 +116,8 @@ const CustomerDashboard = () => {
    const weekEntries = weeklyGrouped[selectedWeek] || [];
 
    return (
-      <div className="p-6 bg-green-50 min-h-screen">
-         <h1 className="text-2xl font-bold text-green-800 mb-6 text-center">
+      <div className="p-4 sm:p-6 bg-green-50 min-h-screen">
+         <h1 className="text-xl sm:text-2xl font-bold text-green-800 text-center mb-4">
             {t("weeklyMilkPaymentSummary")}
          </h1>
 
@@ -131,7 +128,7 @@ const CustomerDashboard = () => {
          ) : (
             <>
                {/* Week Pagination */}
-               <div className="flex justify-center items-center gap-2 mb-6 flex-wrap">
+               <div className="flex justify-center items-center gap-2 mb-4 flex-wrap">
                   <button
                      onClick={() => setWeekPage((p) => Math.max(p - 1, 1))}
                      className="px-2 py-1 border rounded disabled:opacity-50"
@@ -165,18 +162,13 @@ const CustomerDashboard = () => {
                   </button>
                </div>
 
-               {/* Week Table */}
-               <div className="bg-white p-4 rounded shadow overflow-x-auto">
-                  <div className="flex justify-between items-center mb-2 min-w-[600px]">
-                     <h2 className="font-semibold text-lg text-green-700">
+               {/* Week Table with Scroll and Tight Layout */}
+               <div className="bg-white p-3 sm:p-4 rounded shadow overflow-x-auto">
+                  <div className="flex justify-between items-center mb-3">
+                     <h2 className="font-semibold text-green-700 text-sm sm:text-base">
                         {t("week")}: {formatWeekRange(selectedWeek)}
                      </h2>
-                     <button
-                        onClick={exportToPDF}
-                        className="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded"
-                     >
-                        {t("downloadPdf")}
-                     </button>
+            
                   </div>
 
                   <div className="overflow-x-auto">
@@ -188,6 +180,15 @@ const CustomerDashboard = () => {
                               <th className="p-2">{t("liters")}</th>
                               <th className="p-2">{t("fat")}</th>
                               <th className="p-2">{t("amount")}</th>
+                              <th>
+                                 {" "}
+                                 <button
+                                    onClick={exportToPDF}
+                                    className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 text-sm rounded"
+                                 >
+                                    {t("downloadPdf")}
+                                 </button>
+                              </th>
                            </tr>
                         </thead>
                         <tbody>
@@ -206,15 +207,23 @@ const CustomerDashboard = () => {
                                  </td>
                               </tr>
                            ))}
+                           <tr className="border-b text-center">
+                              <td className="p-2"></td>
+                              <td className="p-2 capitalize"></td>
+                              <td className="p-2"></td>
+                              <td className="p-2"></td>
+                              <td className="p-2"></td>
+                              <td className="p-2">
+                                 <span className="text-right font-semibold mt-2 text-sm min-w-[600px]">
+                                    {t("total")} (Rs.):{" "}
+                                    {weekEntries
+                                       .reduce((acc, e) => acc + e.amount, 0)
+                                       .toFixed(2)}
+                                 </span>
+                              </td>
+                           </tr>
                         </tbody>
                      </table>
-                  </div>
-
-                  <div className="text-right mt-4 font-semibold min-w-[600px]">
-                     {t("total")} (Rs.):{" "}
-                     {weekEntries
-                        .reduce((acc, e) => acc + e.amount, 0)
-                        .toFixed(2)}
                   </div>
                </div>
             </>

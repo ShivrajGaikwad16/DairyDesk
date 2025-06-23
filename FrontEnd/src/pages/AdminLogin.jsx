@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
    const { t } = useTranslation();
    const [username, setUsername] = useState("");
    const [password, setPassword] = useState("");
+   const navigate = useNavigate();
 
    const handleSubmit = async (e) => {
       e.preventDefault();
@@ -20,7 +22,8 @@ const AdminLogin = () => {
          localStorage.setItem("token", res.data.data.accessToken);
          localStorage.setItem("user", JSON.stringify(res.data.data.user));
          localStorage.setItem("role", res.data.data.user.role);
-         window.location.href = "/add-entry"; // Redirect after login
+         navigate("/add-entry");
+         
       } catch  {
          alert("Login failed. Please check credentials.");
       }

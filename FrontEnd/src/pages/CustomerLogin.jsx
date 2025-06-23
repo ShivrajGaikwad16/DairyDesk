@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const CustomerLogin = () => {
    const { t } = useTranslation();
    const [mobile, setMobile] = useState("");
    const [error, setError] = useState("");
+   const navigate = useNavigate();
 
    const handleSubmit = async (e) => {
       e.preventDefault();
@@ -27,7 +29,7 @@ const CustomerLogin = () => {
          localStorage.setItem("customerId", user._id); // Store ID if needed separately
 
          // Redirect to customer dashboard
-         window.location.href = "/customer-dashboard";
+         navigate("/customer-dashboard");
       } catch (err) {
          console.error("Login failed", err);
          setError("Login failed. Please check your credentials.");
