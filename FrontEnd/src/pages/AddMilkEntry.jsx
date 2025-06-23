@@ -30,7 +30,7 @@ const AddMilkEntry = () => {
 
    useEffect(() => {
       axios
-         .get("http://localhost:3000/api/v1/customers/", {
+         .get("https://dairy-desk.vercel.app/api/v1/customers/", {
             headers: {
                Authorization: `Bearer ${token}`,
             },
@@ -46,7 +46,7 @@ const AddMilkEntry = () => {
    const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-         await axios.post("http://localhost:3000/api/v1/milkentry", form, {
+         await axios.post("https://dairy-desk.vercel.app/api/v1/milkentry", form, {
             headers: {
                Authorization: `Bearer ${token}`,
             },

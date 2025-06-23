@@ -22,7 +22,7 @@ const AddCustomer = () => {
       e.preventDefault();
       try {
          await axios.post(
-            "http://localhost:3000/api/v1/customers/",
+            "https://dairy-desk.vercel.app/api/v1/customers/",
             {
                ...form,
                baseFatRate: parseFloat(form.baseFatRate), // Ensure it's a number

@@ -42,16 +42,16 @@ const AdminDashboard = () => {
 
             const [usersRes, payoutsRes, entriesRes, customersRes] =
                await Promise.all([
-                  axios.get("http://localhost:3000/api/v1/customers/", config),
+                  axios.get("https://dairy-desk.vercel.app/api/v1/customers/", config),
                   axios.get(
-                     "http://localhost:3000/api/v1/milkentry/all-weekly-payouts",
+                     "https://dairy-desk.vercel.app/api/v1/milkentry/all-weekly-payouts",
                      config
                   ),
                   axios.get(
-                     "http://localhost:3000/api/v1/milkentry/entries",
+                     "https://dairy-desk.vercel.app/api/v1/milkentry/entries",
                      config
                   ),
-                  axios.get("http://localhost:3000/api/v1/customers", config),
+                  axios.get("https://dairy-desk.vercel.app/api/v1/customers", config),
                ]);
 
             setUsers(usersRes.data.data);

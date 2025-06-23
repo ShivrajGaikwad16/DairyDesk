@@ -13,7 +13,7 @@ const CustomerLogin = () => {
 
       try {
          const res = await axios.post(
-            "http://localhost:3000/api/v1/users/login-customer",
+            "https://dairy-desk.vercel.app/api/v1/users/login-customer",
             {
                mobile,
             }

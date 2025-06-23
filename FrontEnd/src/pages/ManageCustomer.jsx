@@ -26,7 +26,7 @@ const ManageCustomer = () => {
 
    const fetchCustomers = async () => {
       try {
-         const res = await axios.get("http://localhost:3000/api/v1/customers", {
+         const res = await axios.get("https://dairy-desk.vercel.app/api/v1/customers", {
             headers: { Authorization: `Bearer ${token}` },
          });
          setCustomers(res.data.data || []);
@@ -61,7 +61,7 @@ const ManageCustomer = () => {
    const saveChanges = async () => {
       try {
          await axios.put(
-            `http://localhost:3000/api/v1/customers/${editingCustomer._id}`,
+            `https://dairy-desk.vercel.app/api/v1/customers/${editingCustomer._id}`,
             { ...formData, baseFatRate: parseFloat(formData.baseFatRate) },
             { headers: { Authorization: `Bearer ${token}` } }
          );
@@ -75,7 +75,7 @@ const ManageCustomer = () => {
    const deleteCustomer = async (id) => {
       if (window.confirm(t("confirmDelete"))) {
          try {
-            await axios.delete(`http://localhost:3000/api/v1/customers/${id}`, {
+            await axios.delete(`https://dairy-desk.vercel.app/api/v1/customers/${id}`, {
                headers: { Authorization: `Bearer ${token}` },
             });
             fetchCustomers();
@@ -91,7 +91,7 @@ const ManageCustomer = () => {
       setLoadingSummary(true);
       try {
          const res = await axios.get(
-            `http://localhost:3000/api/v1/milkentry/summary/weekly?customerId=${customerId}`,
+            `https://dairy-desk.vercel.app/api/v1/milkentry/summary/weekly?customerId=${customerId}`,
             { headers: { Authorization: `Bearer ${token}` } }
          );
          setViewingCustomer(name);

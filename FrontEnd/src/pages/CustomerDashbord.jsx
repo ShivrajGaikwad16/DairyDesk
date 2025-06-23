@@ -20,7 +20,7 @@ const CustomerDashboard = () => {
       const fetchData = async () => {
          try {
             const res = await axios.get(
-               `http://localhost:3000/api/v1/milkentry/customer-milk-entry?customerId=${customerId}`,
+               `https://dairy-desk.vercel.app/api/v1/milkentry/customer-milk-entry?customerId=${customerId}`,
                {
                   headers: { Authorization: `Bearer ${token}` },
                }

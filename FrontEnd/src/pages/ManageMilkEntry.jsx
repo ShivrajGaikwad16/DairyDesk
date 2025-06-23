@@ -26,7 +26,7 @@ const ManageMilkEntry = () => {
    const fetchEntriesByDate = async (selectedDate) => {
       try {
          const res = await axios.get(
-            `http://localhost:3000/api/v1/milkentry?date=${selectedDate}`,
+            `https://dairy-desk.vercel.app/api/v1/milkentry?date=${selectedDate}`,
             { headers: { Authorization: `Bearer ${token}` } }
          );
          setEntries(res.data.data);
@@ -77,7 +77,7 @@ const ManageMilkEntry = () => {
    const saveChanges = async () => {
       try {
          await axios.put(
-            `http://localhost:3000/api/v1/milkentry/${editingEntry._id}`,
+            `https://dairy-desk.vercel.app/api/v1/milkentry/${editingEntry._id}`,
             formData,
             { headers: { Authorization: `Bearer ${token}` } }
          );
@@ -91,7 +91,7 @@ const ManageMilkEntry = () => {
    const deleteEntry = async (id) => {
       if (window.confirm(t("confirmDelete"))) {
          try {
-            await axios.delete(`http://localhost:3000/api/v1/milkentry/${id}`, {
+            await axios.delete(`https://dairy-desk.vercel.app/api/v1/milkentry/${id}`, {
                headers: { Authorization: `Bearer ${token}` },
             });
             fetchEntriesByDate(date);
