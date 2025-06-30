@@ -83,7 +83,7 @@ const AdminDashboard = () => {
       const doc = new jsPDF();
 
       doc.setFontSize(18);
-      doc.text(t("weeklySalaryReport"), 70, 15);
+      doc.text("Weekly Salary Report", 70, 15);
 
       const tableData = payouts.map((p) => [
          p.customerName || "N/A",
@@ -96,7 +96,7 @@ const AdminDashboard = () => {
       );
 
       tableData.push([
-         { content: t("total"), styles: { fontStyle: "bold" } },
+         { content: "Total", styles: { fontStyle: "bold" } },
          {
             content: `Rs. ${totalAmount.toFixed(2)}`,
             styles: { fontStyle: "bold" },
@@ -105,7 +105,7 @@ const AdminDashboard = () => {
 
       autoTable(doc, {
          startY: 25,
-         head: [[t("customerName"), t("totalAmount")]],
+         head: [["Customer Name", "Total Amount"]],
          body: tableData,
       });
 
