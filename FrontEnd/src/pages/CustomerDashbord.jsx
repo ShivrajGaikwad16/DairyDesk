@@ -72,13 +72,13 @@ const CustomerDashboard = () => {
       const weekEntries = weeklyGrouped[selectedWeek] || [];
 
       doc.text(
-         `${t("milkSummary")} - ${formatWeekRange(selectedWeek)}`,
+         `${"milkSummary"} - ${formatWeekRange(selectedWeek)}`,
          14,
          20
       );
       autoTable(doc, {
          startY: 30,
-         head: [[t("date"), t("session"), t("liters"), t("fat"), t("amount")]],
+         head: [["Date", "Sessions", "Liters", "Fat", "Amount"]],
          body: weekEntries.map((e) => [
             new Date(e.date).toLocaleDateString(),
             t(e.session),
@@ -90,7 +90,7 @@ const CustomerDashboard = () => {
 
       const total = weekEntries.reduce((sum, e) => sum + e.amount, 0);
       doc.text(
-         `${t("total")}: Rs. ${total.toFixed(2)}`,
+         `${"Total"}: Rs. ${total.toFixed(2)}`,
          14,
          doc.lastAutoTable.finalY + 10
       );
