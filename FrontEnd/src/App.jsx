@@ -9,6 +9,7 @@ function App() {
       <BrowserRouter>
          <AllRoutes />
          <SpeedInsights/>
+         
       </BrowserRouter>
    );
 }
